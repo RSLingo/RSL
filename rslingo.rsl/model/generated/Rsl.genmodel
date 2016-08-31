@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/rslingo.rsl/src-gen" editDirectory="/rslingo.rsl.edit/src"
+    editorDirectory="/rslingo.rsl.editor/src" modelPluginID="rslingo.rsl" forceOverwrite="true"
+    modelName="Rsl" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="rslingo.rsl.edit"
+    editorPluginID="rslingo.rsl.editor" runtimeVersion="2.11">
+  <genPackages prefix="Rsl" basePackage="rslingo.rsl" disposableProviderFactory="true"
+      fileExtensions="rsl" ecorePackage="Rsl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//ProjectType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Development"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Design"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Deployment"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Maintenance"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Auditing"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Training"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Research"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//ProjectDomain">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/PublicSector"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/Education"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/Health"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/Telecoms"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/EnergyAndUtilities"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/FinanceAndBanks"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ProjectDomain/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//TermType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//TermType/Adjective"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//TermType/Adverb"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//TermType/Noun"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//TermType/Verb"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//StakeholderType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderType/Organization"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderType/BusinessUnit"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderType/Team"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderType/Person"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderType/ExternalSystem"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//StakeholderCategory">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_Customer"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_Sponsor"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_User"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_User_Direct"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_User_Indirect"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_Advisor"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_DomainExpert"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_Government"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_RegulatorAgent"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Business_Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Manager"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Manager_ProjectManager"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Manager_TeamManager"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Manager_FunctionalManager"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Manager_Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_BusinessAnalyst"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_RequirementsEngineer"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_Trainer"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_SoftwareArchitect"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_SoftwareDesigner"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_SoftwareTester"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Technical_Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/ExternalSystem"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StakeholderCategory/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//SystemType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemType/System"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemType/SubSystem"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemType/ReusableSystem"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//SystemScope">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemScope/In"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemScope/Out"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//SystemRelationType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationType/In"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationType/Out"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationType/In_Out"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//SystemRelationCategory">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationCategory/Import"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationCategory/Export"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationCategory/ImportExport"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationCategory/Sync"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationCategory/Interact"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//SystemRelationCategory/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//EntityType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//EntityType/Principal"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//EntityType/Secondary"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//AttributeType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Decimal"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Currency"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Date"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Time"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Datetime"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/String"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Text"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Regex"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/URL"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Image"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/XML"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//AttributeType/Binary"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//BusinessEntityType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//BusinessEntityType/VerySimple"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//BusinessEntityType/Simple"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//BusinessEntityType/Complex"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//ActorType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ActorType/User"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ActorType/ExternalSystem"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ActorType/Timer"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//RequirementRelationType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Requires"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Supports"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Obstructs"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Conflicts"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Identical"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Relates"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//RequirementRelationType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//GoalType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//GoalType/Abstract"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//GoalType/Concrete"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//FRType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//FRType/Functional"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//FRType/Behavioral"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//FRType/Data"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//QRType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Security"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Performance"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Usability"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Appearance"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Operational"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Maintenance"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Cultural"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Legal"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Efficiency"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Reliability"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRType/Interoperability"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//QRSubType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Security_Privacy"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Security_Integrity"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Usability_EaseOfUse"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Usability_EaseOfLearn"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Usability_Accessibility"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Usability_Understandability"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Usability_Learnability"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Usability_Attractiveness"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//QRSubType/Efficiency_ResourceUse"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//Metric">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Time_Day"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Time_Hour"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Time_Min"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Time_Sec"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Time_mSec"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Frequency_Hz"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Frequency_KHz"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Frequency_MHz"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Capacity_KByte"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Capacity_MByte"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Capacity_GByte"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Capacity_TByte"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Task"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//Metric/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//ConstraintType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Cultural"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Legal"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Organizational"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Project"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Technological"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Physical"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//ConstraintSubType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Cultural_Language"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Cultural_Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Legal_National"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Legal_International"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Legal_Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Organizational_Politics"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Organizational_Management"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Organizational_Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Project_Cost"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Project_Time"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Project_Scope"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Project_Quality"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Project_Risk"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Technological_PlatformHardware"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Technological_PlatformSoftware"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Technological_DevelopmentTool"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Physical_Concrete"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Physical_Abstract"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ConstraintSubType/Other_Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//UseCaseType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityCreate"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityRead"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityUpdate"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityDelete"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityReport"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityDashboard"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntityOther"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesManage"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesBrowse"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesSearch"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesReport"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesDashboard"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesInteropImport"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesInteropExport"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesInteropSync"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesInteropSendMessage"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesInteropServiceInvocation"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesMapShow"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesMapInteract"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/EntitiesOther"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//UseCaseType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//ScenarioType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ScenarioType/Main"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ScenarioType/Alternative"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//ScenarioType/Exception"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//StepOperationType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationType/Actor_PrepareData"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationType/Actor_CallSystem"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationType/System_Executes"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationType/System_ReturnResult"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationType/Other"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationType/None"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//StepOperationSubType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationSubType/SubmitData"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationSubType/ShowData"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationSubType/CancelUseCase"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationSubType/TerminateUseCase"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StepOperationSubType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Rsl.ecore#//StateMachineType">
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StateMachineType/Simple"/>
+      <genEnumLiterals ecoreEnumLiteral="Rsl.ecore#//StateMachineType/Complex"/>
+    </genEnums>
+    <genClasses ecoreClass="Rsl.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Model/packages"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PackageAbstract">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//PackageAbstract/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageAbstract/imports"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Date">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Date/day"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Date/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Date/year"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Month">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Month/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Progress">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Progress/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Priority">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Priority/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PackageProject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageProject/project"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageProject/packageGlossaries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageProject/packageStakeholders"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageProject/packageSystems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageProject/systemRelations"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PackageGlossary">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageGlossary/glossaryTerms"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PackageStakeholder">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageStakeholder/stakeholders"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PackageSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/system"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/entities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/businessEntities"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/actors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/requirements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/stateMachine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/requirementRelations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PackageSystem/systemRelations"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Project">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Project/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Project/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Project/nameAlias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Project/domain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Project/planned"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Project/actual"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Project/organizations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Project/progress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Project/summary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Project/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PlannedSchedule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PlannedSchedule/start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PlannedSchedule/end"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//ActualSchedule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//ActualSchedule/start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//ActualSchedule/end"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Organizations">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Organizations/customer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Organizations/supplier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Organizations/partners"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//GlossaryTerm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//GlossaryTerm/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//GlossaryTerm/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//GlossaryTerm/nameAlias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//GlossaryTerm/acronym"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//GlossaryTerm/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//GlossaryTerm/synonym"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//GlossaryTerm/super"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//GlossaryTerm/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//TermApplication">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//TermApplication/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefTermApplication">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefTermApplication/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Stakeholder">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Stakeholder/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Stakeholder/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Stakeholder/nameAlias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Stakeholder/category"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Stakeholder/super"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Stakeholder/partOf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Stakeholder/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//System">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//System/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//System/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//System/nameAlias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//System/scope"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//System/subSystems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//System/reusableSystems"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//System/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefSystem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefSystem/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//SystemRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SystemRelation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SystemRelation/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//SystemRelation/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//SystemRelation/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SystemRelation/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SystemRelation/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Entity/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Entity/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Entity/nameAlias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Entity/super"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Entity/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Entity/primaryKey"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Entity/foreignKeys"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Entity/checks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Entity/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/subsize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/nameAlias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Attribute/multiplicity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/defaultValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/notNull"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/unique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Attribute/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Multiplicity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Multiplicity/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//PrimaryKey">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//PrimaryKey/refTo"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//ForeignKey">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//ForeignKey/fentity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//ForeignKey/refTo"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefAttribute/refAttr"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Check">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Check/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Check/checkExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//BusinessEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//BusinessEntity/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//BusinessEntity/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//BusinessEntity/nameAlias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//BusinessEntity/master"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//BusinessEntity/detail"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//BusinessEntity/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//BusinessEntity/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//MasterBEntity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//MasterBEntity/masterEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//DetailBEntity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//DetailBEntity/entityDetail"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//DetailBEntity/refEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//ReferenceBEntity">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//ReferenceBEntity/refEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefEntity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefEntity/refEntity"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Actor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Actor/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Actor/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Actor/nameAlias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Actor/stakeholder"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Actor/super"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Actor/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Requirement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Requirement/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Requirement/nameAlias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Requirement/stakeholder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Requirement/priority"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Requirement/progress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Requirement/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RequirementRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//RequirementRelation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//RequirementRelation/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RequirementRelation/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RequirementRelation/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//RequirementRelation/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Goal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Goal/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Goal/partOf"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//FR">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//FR/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//FR/partOf"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//QR">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//QR/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//QR/subType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//QR/metric"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//QR/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//QR/partOf"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Constraint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Constraint/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Constraint/subType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Constraint/partOf"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UseCase">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UseCase/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/actorInitiates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/actorParticipates"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/bEntity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UseCase/precondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UseCase/postcondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/extensionPoints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/includes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UseCase/scenarios"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefActor">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefActor/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UCActions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UCActions/actions"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UCAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UCAction/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UCAction/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UCIncludes">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UCIncludes/includes"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UCExtends">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//UCExtends/usecase"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//UCExtends/extensionPoint"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UCExtensionPoints">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//UCExtensionPoints/extensionPoints"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//UCExtensionPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UCExtensionPoint/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//UCExtensionPoint/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefUC">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefUC/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Scenario">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Scenario/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Scenario/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Scenario/nameAlias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Scenario/mode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Scenario/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Scenario/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Step">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Step/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Step/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//Step/subType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Step/simpleStep"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Step/subSteps"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Step/ifSteps"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//SimpleStep">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SimpleStep/nameAlias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//SimpleStep/actor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SimpleStep/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SimpleStep/precondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//SimpleStep/postcondition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//SimpleStep/next"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//IfStep">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//IfStep/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//IfStep/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//StateMachine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//StateMachine/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//StateMachine/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//StateMachine/nameAlias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//StateMachine/entity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//StateMachine/states"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//StateMachine/description"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//States"/>
+    <genClasses ecoreClass="Rsl.ecore#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//State/states"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//State/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//State/isInitial"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//State/isFinal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//State/onEntry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Rsl.ecore#//State/onExit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//State/transitions"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//Transition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Rsl.ecore#//Transition/ucAction"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//Transition/nextstate"/>
+    </genClasses>
+    <genClasses ecoreClass="Rsl.ecore#//RefUCAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefUCAction/useCase"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Rsl.ecore#//RefUCAction/action"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

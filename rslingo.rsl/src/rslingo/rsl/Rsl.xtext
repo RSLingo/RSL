@@ -1,0 +1,521 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: August/2016
+ * 
+ * RSLingo's RSL (Requirements Specification Language) Grammar
+ * Version 1.0 
+ * 
+ */
+
+grammar rslingo.rsl.Rsl with org.eclipse.xtext.common.Terminals
+
+generate rsl "http://www.rsl.rslingo/Rsl"
+
+
+Model: 
+	(packages+= PackageAbstract)*;
+	
+PackageAbstract:
+	PackageProject | PackageSystem | PackageGlossary | PackageStakeholder ;
+
+/********************************************************************************
+ * Names and Import Rule(s)
+*********************************************************************************/
+
+QualifiedName:
+  	ID ('.' ID)*;
+
+QualifiedNameWithWildcard:
+  	QualifiedName '.*'?;
+  	
+Import:
+	'import' importedNamespace=QualifiedNameWithWildcard;
+
+/********************************************************************************
+ * General Rule(s)
+*********************************************************************************/
+
+Date:
+	day=INT '-' month=Month '-' year=INT;
+
+Month:
+	name=('Jan'|'Feb'|'Mar'|'Apr'|'May'|'Jun'|'Jul'|'Aug'|'Sep'|'Oct'|'Nov'|'Dec');
+	
+Progress:
+	value=('NotPlan'|'Plan'|'OnDesign'|'OnDevelop'|'OnTest'|'OnDeploy'|'Concluded');
+
+Priority:
+	value=('Must'|'Should'|'Could'|'Won\'t');
+		
+/********************************************************************************
+ * Packages Rule(s)
+*********************************************************************************/
+
+PackageProject:
+	// Business Level
+	'package-project' name=QualifiedName 
+		imports+=Import*
+		project=Project
+		// Optional Nested packages
+		packageGlossaries+=PackageGlossary* 
+		packageStakeholders+=PackageStakeholder* 
+		packageSystems+=PackageSystem*
+		systemRelations+=SystemRelation*
+	;
+
+PackageGlossary:
+	'package-glossary' name=QualifiedName
+		imports+=Import*
+		glossaryTerms+=GlossaryTerm+
+	;
+
+PackageStakeholder:
+	'package-stakeholders' name=QualifiedName 
+		imports+=Import*
+		stakeholders+=Stakeholder+
+	;
+
+
+PackageSystem:
+	// System Level
+	'package-system' name=QualifiedName
+		imports+=Import*
+		system=System
+		// Key system elements
+		entities+=Entity*
+		businessEntities+=BusinessEntity* 
+		actors+=Actor* 
+		requirements+=Requirement*
+		stateMachine+= StateMachine*
+		// if needed for specification of requirement relations
+		requirementRelations+=RequirementRelation*
+		// if needed for specification of system relations
+		systemRelations+=SystemRelation*
+	;
+
+/********************************************************************************
+ * Project-related Rule(s)
+*********************************************************************************/
+
+Project:
+	'project' name=ID ':' type=ProjectType '{'
+		('name' nameAlias=STRING)
+		('domain' domain=ProjectDomain)
+		(planned=PlannedSchedule)?
+		(actual=ActualSchedule)?
+		(organizations=Organizations)?
+		('progress' progress=Progress)?
+		('summary' summary=STRING)?
+		('description' description=STRING)?
+	'}';
+
+enum ProjectType:
+	Development | Design | Deployment | Maintenance | Auditing | Training | Research | Other;
+
+enum ProjectDomain:
+	PublicSector | Education | Health | Telecoms | EnergyAndUtilities | FinanceAndBanks | Other;
+				
+PlannedSchedule:
+	'plannedSchedule' '{' 'start' start=Date 'end' end=Date '}';
+
+ActualSchedule:
+	'actualSchedule' '{' 'start' start=Date ('end' end=Date)? '}';
+
+Organizations:
+	'organizations' '{'
+		'customer' customer=STRING
+		'supplier' supplier=STRING
+		'partners' partners=STRING 
+	'}';
+
+/********************************************************************************
+ * Glossary-related Rule(s)
+*********************************************************************************/
+GlossaryTerm:
+	'term' name=ID ':' type=TermType  '{'
+		('name' nameAlias=STRING)
+		('acronym' acronym=STRING)? &
+		('applicationTo' ref= RefTermApplication)? &
+		('synonym' synonym=STRING)? &
+		('isA' /*Hypernym*/ super=[GlossaryTerm])? &
+		('description' description=STRING)?	
+	'}';
+
+enum TermType /*POS, Part-Of-Speech */:
+	Adjective | Adverb | Noun | Verb;
+
+TermApplication:
+	value=('Stakeholder' | 'System' | 'Actor' | 'Entity' | 'Other');
+
+RefTermApplication:
+	refs+=TermApplication (',' refs+=TermApplication)*;
+	
+/********************************************************************************
+ * Stakeholders-related Rule(s)
+*********************************************************************************/
+
+Stakeholder:
+	'stakeholder' name=ID ':' type=StakeholderType '{'
+		('name' nameAlias=STRING)
+		('category' category= StakeholderCategory)
+		('isA' super=[Stakeholder])? &
+		('partOf' partOf=[Stakeholder])? &
+		('description' description=STRING)?
+	'}';
+
+enum StakeholderType:
+	Organization | BusinessUnit | Team | Person | ExternalSystem | Other;
+
+enum StakeholderCategory:
+	Business | Business_Customer | Business_Sponsor | Business_User | Business_User_Direct | Business_User_Indirect | 
+	Business_Advisor | Business_DomainExpert | Business_Government | Business_RegulatorAgent | Business_Other |
+	Manager | Manager_ProjectManager | Manager_TeamManager | Manager_FunctionalManager | Manager_Other |
+	Technical | Technical_BusinessAnalyst | Technical_RequirementsEngineer | Technical_Trainer | 
+	Technical_SoftwareArchitect | Technical_SoftwareDesigner | Technical_SoftwareTester | Technical_Other |
+	ExternalSystem |
+	Other;
+
+/********************************************************************************
+ * System-related Rule(s)
+*********************************************************************************/
+System:
+	'system' name=ID ':' type=SystemType '{'
+		('name' nameAlias=STRING)
+		'scope' scope=SystemScope
+		//('partOf' partOf=[System])?
+		('subSystems' subSystems=RefSystem)?
+		('reusableSystems' reusableSystems=RefSystem)?
+		('description' description=STRING)?
+	'}';
+
+enum SystemType:
+	System | SubSystem | ReusableSystem | Other;
+
+enum SystemScope:
+	In | Out;
+
+RefSystem:
+	refs+=[System](',' refs+=[System])*;
+	
+SystemRelation:
+	'systemRelation' name=ID ':' type=SystemRelationType '{'
+		'source' source=[System]
+		'target' target=[System]
+		'category' category=SystemRelationCategory
+		('description' description=STRING)?
+	'}';
+
+enum SystemRelationType:
+	In | Out | In_Out;
+
+enum SystemRelationCategory:
+	Import | Export | ImportExport | Sync | Interact | Other;
+
+/********************************************************************************
+ * System-related Rule(s): Entity and BusinessEntities
+*********************************************************************************/
+
+/********************************************************************************/
+Entity:
+	'entity' name=ID ':' type=EntityType '{'
+		('name' nameAlias=STRING)
+		('isA' super=[Entity])?
+		(attributes+=Attribute)+
+		(primaryKey=PrimaryKey)?
+		(foreignKeys+=ForeignKey)*
+		(checks+=Check)*
+		('description' description=STRING)?
+	'}';
+
+enum EntityType:
+	Principal|Secondary;
+
+Attribute:
+	'attribute' name=ID ':' type=AttributeType ('(' size=INT ('.' subsize=INT)? ')')? '{'
+		('name' nameAlias=STRING)
+		('multiplicity' multiplicity=Multiplicity)? 
+		('defaultValue' defaultValue=STRING)? 
+		(notNull='NotNull')? 
+		(unique='Unique')? 
+		('description' description=STRING)?
+	'}';
+
+enum AttributeType:
+	Integer|Decimal|Boolean|Currency|Date|Time|Datetime|String|Text|Regex|URL|Image|XML|Binary;
+	
+Multiplicity:
+	value=('"0"' | '"1"' | '"0..1"' | '"*"' | STRING);
+
+PrimaryKey:
+	'primaryKey' '(' refTo=RefAttribute ')';
+
+ForeignKey:
+	'foreignKey' fentity=[Entity] '(' refTo=RefAttribute ')';
+
+RefAttribute:
+	refAttr+=[Attribute](',' refAttr+=[Attribute])* ;
+
+Check:
+	'check' name=ID checkExpression=STRING;
+
+/********************************************************
+ *  Business Entities
+ ********************************************************/
+
+BusinessEntity:
+	'businessEntity' name=ID ':' type=BusinessEntityType '{'
+		('name' nameAlias=STRING)
+		(master=MasterBEntity)
+		(detail=DetailBEntity)?
+		(reference=ReferenceBEntity)?
+		('description' description=STRING)?
+	'}';
+
+enum BusinessEntityType:
+	VerySimple | Simple | Complex;
+
+MasterBEntity:
+	'master' masterEntity= [Entity];
+	
+DetailBEntity:
+	'detail' entityDetail= [Entity] ('{' 'reference' refEntity=RefEntity '}')?;
+	
+ReferenceBEntity:
+	'reference' refEntity= RefEntity;
+
+RefEntity:
+	refEntity+=[Entity] (',' refEntity+=[Entity])* ;
+
+/********************************************************************************
+ * System-related Rule(s): Actors
+*********************************************************************************/
+Actor:
+	'actor' name=ID ':' type=ActorType '{'
+		('name' nameAlias=STRING)
+		('stakeholder' stakeholder=[Stakeholder])?
+		('isA' super=[Actor])?
+		('description' description=STRING)?
+	'}';
+
+enum ActorType:
+	User | ExternalSystem | Timer;
+	
+/*******************************************************************************
+ * System-related Rule(s): Requirements: Goal | FR | QR | Constraint | UseCase
+********************************************************************************/
+
+Requirement:
+	Goal | FR | QR | Constraint | UseCase;
+
+RequirementRelation:
+	'requirementRelation' name=ID ':' type=RequirementRelationType '{'
+		'source' source=[Requirement]
+		'target' target=[Requirement]
+		('description' description=STRING)?
+	'}';
+
+enum RequirementRelationType:
+	Requires | Supports | Obstructs | Conflicts | Identical | Relates | Other;
+
+//*******************************************************************************	
+Goal:
+	'goal' name=ID ':' type=GoalType '{'
+		('name' nameAlias=STRING)
+		('stakeholder' stakeholder=[Stakeholder])?
+		('partOf' partOf=[Goal])?
+		('priority' priority=Priority)?
+		('progress' progress=Progress)?
+		('description' description=STRING)?
+	'}';
+
+enum GoalType:
+	Abstract | Concrete; 
+	
+//*******************************************************************************
+FR:
+	'FR' name=ID ':' type=FRType '{'
+		('name' nameAlias=STRING)
+		('stakeholder' stakeholder=[Stakeholder])?
+		('partOf' partOf=[FR])?
+		('priority' priority=Priority)?
+		('progress' progress=Progress)?
+		('description' description=STRING)?
+	'}';
+
+enum FRType:
+	Functional | Behavioral | Data;
+
+//*******************************************************************************	
+QR:
+	'QR' name=ID ':' type=QRType (':' subType=QRSubType)? '{'
+		('name' nameAlias=STRING)
+		('metric' metric=Metric)?
+		('value' value=INT)?
+		('stakeholder' stakeholder=[Stakeholder])?
+		('partOf' partOf=[QR])?
+		('priority' priority=Priority)?
+		('progress' progress=Progress)?
+		('description' description=STRING)?
+	'}';
+
+enum QRType:
+	Security|Performance|Usability|Appearance|Operational|Maintenance|Cultural|Legal|Efficiency|Reliability|Interoperability;
+
+enum QRSubType:
+	Security_Privacy|Security_Integrity|
+	Usability_EaseOfUse|Usability_EaseOfLearn|Usability_Accessibility|Usability_Understandability|Usability_Learnability|Usability_Attractiveness|
+	Efficiency_ResourceUse;
+
+enum Metric:
+	Time_Day | Time_Hour | Time_Min | Time_Sec | Time_mSec | 
+	Frequency_Hz | Frequency_KHz | Frequency_MHz |
+	Capacity_KByte | Capacity_MByte | Capacity_GByte | Capacity_TByte |
+	Task | 
+	Other;
+
+//*******************************************************************************
+Constraint:
+	'constraint' name=ID ':' type=ConstraintType (':' subType=ConstraintSubType)?'{'
+		('name' nameAlias=STRING)
+		('stakeholder' stakeholder=[Stakeholder])?
+		('partOf' partOf=[Constraint])?
+		('priority' priority=Priority)?
+		('progress' progress=Progress)?
+		('description' description=STRING)?
+	'}';
+
+enum ConstraintType:
+	Cultural | Legal | Organizational | Project | Technological | Physical | Other;
+	
+enum ConstraintSubType:
+	Cultural_Language | Cultural_Other |
+	Legal_National | Legal_International | Legal_Other |
+	Organizational_Politics | Organizational_Management | Organizational_Other |
+	Project_Cost | Project_Time | Project_Scope | Project_Quality | Project_Risk |
+	Technological_PlatformHardware|Technological_PlatformSoftware|Technological_DevelopmentTool|
+	Physical_Concrete | Physical_Abstract|
+	Other_Other;
+	
+//*******************************************************************************
+UseCase:
+	'useCase' name=ID ':' type=UseCaseType '{'
+		('name' nameAlias=STRING)
+		('actorInitiates' actorInitiates=[Actor])
+		('actorParticipates' actorParticipates+=RefActor)?
+		('businessEntity' bEntity=[BusinessEntity])?
+
+		('precondition' precondition=STRING)?
+		('postcondition' postcondition=STRING)?
+		
+		(actions= UCActions)?
+		(extensionPoints= UCExtensionPoints)?
+				
+		(includes= UCIncludes)?
+		(extends+= UCExtends)*
+
+		('stakeholder' stakeholder=[Stakeholder])?
+		('priority' priority=Priority)?
+		('progress' progress=Progress)?
+		('description' description=STRING)?
+		
+		scenarios+=Scenario*
+	'}';
+
+enum UseCaseType:
+	EntityCreate | EntityRead | EntityUpdate | EntityDelete | EntityReport | EntityDashboard | EntityOther | 
+	EntitiesManage | EntitiesBrowse | EntitiesSearch | EntitiesReport | EntitiesDashboard | 
+	EntitiesInteropImport | EntitiesInteropExport | EntitiesInteropSync | EntitiesInteropSendMessage | EntitiesInteropServiceInvocation | 
+	EntitiesMapShow | EntitiesMapInteract | EntitiesOther  | 
+	Other;
+	
+RefActor:
+	refs+=[Actor](',' refs+=[Actor])*;
+
+UCActions: 
+	'actions' actions+= UCAction (',' actions+=UCAction)*;
+	
+UCAction: 
+	name=ID ('{' 'description' description=STRING '}' )?;
+
+UCIncludes:
+	'includes' includes+=RefUC;	
+	
+UCExtends:
+	'extends' usecase=[UseCase] 'onExtensionPoint' extensionPoint=[UCExtensionPoint | QualifiedName];	
+	
+UCExtensionPoints:
+	'extensionPoints' extensionPoints+= UCExtensionPoint (',' extensionPoints+=UCExtensionPoint)*;
+	
+UCExtensionPoint: 
+	name=ID ('{' 'description' description=STRING '}' )?;
+
+RefUC:
+	refs+=[UseCase](',' refs+=[UseCase])*;
+
+Scenario:
+	'scenario' name=ID ':' type=ScenarioType '{'
+		('name' nameAlias=STRING)
+		('executionMode' mode=('Sequential'|'Parallel'))?
+		('description' description=STRING)?
+		steps+=Step*
+	'}';
+
+Step:
+	'step' name=ID ':' type=StepOperationType (':' subType=StepOperationSubType )?'{'
+		(simpleStep= SimpleStep | subSteps+= Step+ | ifSteps+= IfStep* )
+	'}';
+
+SimpleStep:
+	(nameAlias=STRING)
+	('actor' actor=[Actor])?
+	('description' description=STRING)?
+	('precondition' precondition=STRING)?
+	('postcondition' postcondition=STRING)?
+	('nextStep' next=[Step])?;
+
+IfStep:
+	('ifAction' action=[UCAction | QualifiedName]) '{'
+		steps+= Step+
+	'}';
+	
+enum ScenarioType:	
+	Main | Alternative | Exception;
+
+enum StepOperationType:	
+	Actor_PrepareData | Actor_CallSystem | System_Executes | System_ReturnResult | Other | None ;
+
+enum StepOperationSubType:	
+	SubmitData | ShowData | CancelUseCase | TerminateUseCase | Other;
+
+/********************************************************
+   Entities' State Machines
+*********************************************************/
+
+StateMachine:
+	'stateMachine' name=ID ':' type=StateMachineType '{'
+		'name' nameAlias=STRING
+		'entity' entity= [Entity]
+		states= States
+		('description' description=STRING)?
+	'}';
+
+States:
+	{State} states += State*;
+	
+State:
+	'state' name=ID 
+	(isInitial ?= 'isInitial')? 
+	(isFinal ?= 'isFinal')? 
+	('onEntry' onEntry= STRING)?
+	('onExit' onExit= STRING)?
+	(':' (transitions+= Transition))? (transitions+= Transition)*
+	;
+		
+enum StateMachineType:
+	Simple | Complex;
+
+Transition:
+	(ucAction= RefUCAction ('nextState' nextstate= [State])?);
+	
+RefUCAction:
+	'useCase' useCase=[UseCase] 'action' action= [UCAction | QualifiedName];
