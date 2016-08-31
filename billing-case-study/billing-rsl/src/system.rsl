@@ -1,0 +1,339 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: August/2016
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * 
+ */
+
+package-system billingsystem.systems
+	
+import billingsystem.glossary.*
+import billingsystem.stakeholders.*
+import billingsystem.libX.*
+
+/********************************************************
+   System definition 
+*********************************************************/
+system 	S_billingsystem : System {
+	name "BillingSystem"	
+	scope In
+	description ""
+}
+
+/********************************************************
+   Entities 
+*********************************************************/
+entity E_VAT : Principal {
+	name "VAT"   
+	attribute VATCode: Integer {name "VAT Code" NotNull Unique}
+	attribute VATName: String(30) {name "VAT Class Name" NotNull}
+	attribute VATValue: Decimal(2.2) {name "VAT Class Value " NotNull}
+	primaryKey (VATCode)
+	description "VAT Class"
+}
+
+entity E_Product : Principal {
+	name "Product"   
+	attribute ID: Integer {name "Product ID" NotNull Unique}
+	attribute Name: String(50) {name "Name" multiplicity "1..2" description "Product Name"}
+	attribute valueWithoutVAT: Decimal(16.2) {name "Price Without VAT" NotNull }
+	attribute valueWithVAT: Decimal(16.2) {name "Price With VAT" NotNull }
+	attribute VATClassCode : Integer {name "VAT Code" NotNull}
+	attribute VATClassValue : Decimal(2.2) {name "VAT Class Value " NotNull}
+	primaryKey (ID)
+	foreignKey E_VAT(VATClassCode)
+	description "Products"
+}
+
+entity E_Customer : Principal {
+	name "Customer" 
+	attribute ID: Integer {name "Customer ID" NotNull Unique}
+	attribute Name: String(50) {name "Customer Name" NotNull Unique}
+	attribute FiscalID: String(12) {name "Fiscal ID" NotNull Unique}
+	primaryKey (ID)
+	check CK_Customer1 "ValidFiscalID(FiscalID)"
+	description "Customers" 
+}
+
+entity E_CustomerVIP : Principal {
+	name "CustomerVIP" 
+	isA E_Customer
+	//attribute ID: Integer {name "Customer ID" NotNull Unique}
+	attribute Phone: String(12) {name "Phone #" NotNull Unique}
+	//primaryKey (ID)
+	description "Customers VIP" 
+}
+
+entity E_Invoice : Principal {
+	name "Invoice"   
+	attribute ID: Integer {name "Invoice ID" NotNull Unique}
+	attribute customerID: Integer {name "Customer ID" NotNull}
+	attribute dateCreation: Date {name "Creation Date"  defaultValue "today()" NotNull}
+	attribute dateApproval: Date {name "Approval Date"}
+	attribute datePaid: Date {name "Payment Date" }
+	attribute dateDeleted: Date {name "Delete Date"}
+	attribute isApproved: Boolean {name "Approved?" defaultValue "False"}
+	attribute totalValueWithoutVAT: Decimal(16.2) {name "Total Value Without VAT" NotNull }
+	attribute totalValueWithVAT: Decimal(16.2) {name "Total Value With VAT" NotNull }
+	primaryKey (ID)
+	foreignKey E_Customer(customerID)
+	description "Invoices"
+}
+
+entity E_InvoiceLine: Secondary  {
+	name "InvoiceLine" 
+	attribute ID: Integer {name "Invoice ID" NotNull Unique}
+	attribute invoiceID: Integer {name "Invoice ID" NotNull}
+	attribute order: Integer {name "InvoiceLine Order" NotNull}
+	attribute productID: Integer {name "Product ID" NotNull}
+	attribute valueWithoutVAT: Decimal {name "Value Without VAT" }
+	attribute valueWithVAT: Decimal {name "Value With VAT"}
+	primaryKey (ID)
+	foreignKey E_Invoice(invoiceID, order) 
+	foreignKey E_Product(productID) 
+	check CK_InvoiceLine1 "Unique(invoiceID+order)"
+	description "InvoiceLines"  
+}
+
+
+/********************************************************
+   BusinessEntities 
+*********************************************************/
+
+businessEntity BE_VAT: VerySimple {name "BE_VAT" master E_VAT description "BE VAT"}
+businessEntity BE_Product: Simple {name "BE_Product"  master E_Product reference E_VAT description "BE Product" }
+businessEntity BE_Customer: Simple  {name "BE_Customer"  master E_Customer}
+businessEntity BE_Invoice_Simple: Simple  {name "BE_Invoice_Simple"  master E_Invoice reference E_Customer}
+	
+businessEntity BE_Invoice_Complex: Complex  {
+	name "BE_Invoice_Complex"
+	master E_Invoice
+	detail E_InvoiceLine {reference E_Product, E_VAT}
+	reference E_Customer
+}
+
+
+/********************************************************
+   Actors 
+*********************************************************/
+actor AU_Operator_Customers : User {name "Operator_Customers" description "Manage Customers" }
+actor AU_Operator_Products : User {name "AU_Operator_Products" description "Manage Products"}
+actor AU_Operator : User {name "Operator" isA AU_Operator_Customers description "Manage Invoices and Customers" }
+actor AU_Manager : User {name "Manager" description "Approve Invoices"}
+actor AU_TechnicalAdmin : User {name "TechnicalAdmin" description "Manage Users, VAT, ... Configure" }
+actor AS_ERP_Accounting : ExternalSystem {name "ERP_Accounting" description "Receive info with approved invoices"}
+actor AT_NotifyManager : Timer {name "TimerNotifyManager" description "Notify Manager with Invoices to approve"}	
+
+
+/********************************************************
+   Requirements 
+*********************************************************/
+
+/*
+ * Requirements: Goals
+ */
+ 
+goal G_CC:Abstract {name"Cross-Cutting Concerns" stakeholder stk_enterprise description "Cross-cutting system goals"}
+goal G_CC_1:Abstract {name"Security" stakeholder stk_enterprise partOf G_CC priority Should description "The system shall provide security qualities and respective features such as confidentiality, integrity, authenticity, and non-repudiation."}
+goal G_CC_1_1:Abstract {name"Security at communication level" stakeholder stk_enterprise partOf G_CC_1 priority Should description "The communication between the PC clients and the system server shall be secure..."}
+goal G_CC_1_2:Abstract {name"Data Privacy" stakeholder stk_enterprise partOf G_CC_1 priority Should description "System shall provide that critical data saved at DBs or file system are kept private/confidencial/encrypted"}
+
+/*
+ * Requirements: Constraints
+ */
+ 
+constraint Co1 : Project: Project_Time {name "nameAlias"  stakeholder stk_customer } 
+constraint Co2 : Technological: Technological_PlatformHardware {name "nameAlias"  stakeholder stk_customer } 
+
+/*
+ * Requirements: QRs
+ */
+ QR QR_1 : Usability: Usability_Learnability {name "YYY" metric Time_Min value 2 priority Must description "YYY" }
+ QR QR_2 : Security: Security_Privacy {name "ZZZ"  metric Other value 24 priority Won't description "ZZZ" }
+ 
+ 
+ /*
+ * Requirements: FRs
+ */
+ FR  FR_1 : Functional { name " FR1" stakeholder stk_customer priority Must description "Functional Requirement 1"}
+ FR  FR_2 : Functional { name " FR2" stakeholder stk_operator priority Should description "Functional Requirement 2"}
+ 
+ 
+/*
+ * Requirements: UseCases
+ */
+useCase UC_1_Manage_Invoices: EntitiesManage {
+	name "Manage Invoices"
+	actorInitiates AU_Manager 
+	businessEntity BE_Invoice_Complex 
+	precondition "Conditions that need to be satisfied before executing this Use Case."
+	postcondition "Conditions that need to be satisfied after the execution of the Use Case."
+	actions Close, Search, Filter, Create, Read, Update, Send, Export_Invoices, Print_Invoice, Print_Invoices
+	extensionPoints EPCreate, EPRead, EPUpdate, EPDelete, EPSend, EPExport_Invoices, EPPrint_Invoice, EPPrint_Invoices
+	
+	priority Must //High
+	progress Plan
+	description "Manage Invoices"
+	
+	//*******************
+	scenario MainScenario : Main {
+		name "MainScenario"
+		executionMode Sequential
+
+		step s1: System_Executes: ShowData {"System Shows a 'List of Entity Form' for Invoices, with the available Actions"  nextStep s2}
+	
+		step s2: None {
+		  	ifAction Close {
+				step s2_a_1: Actor_CallSystem: CancelUseCase {"Actor trigger the Close Action" nextStep s3}
+		  	} 
+		  	ifAction Search  {
+				step s2_b_1: Actor_PrepareData {"Actor fills the 'Search' textbox with the search criteria, defined as a string expression"}
+				step s2_b_1: Actor_CallSystem {"Actor trigger the 'Search' action"}
+				step s2_b_2: System_Executes: ShowData {"System shows a refreshed list of invoices based on the search criteria"  nextStep s2}
+		  	} 
+		  	ifAction  Filter {
+				step s2_c_1: Actor_PrepareData {"Actor fills the 'Filter' fiels with a search criteria, defined as a logical expression..."}
+				step s2_c_1: Actor_CallSystem {"Actor trigger the 'Filter' action"} 
+				step s2_c_2: System_Executes: ShowData {"System shows a refreshed list of invoices based on the Filter criteria" nextStep s2}
+			}
+		}
+		step s3: System_Executes: TerminateUseCase {"System terminates the use case"} 
+	}
+	
+	//*******************
+	scenario AltScenario : Alternative {name "nameAlias" }
+}
+
+useCase UC_1_1_Create_Invoice: EntityCreate {
+	name "Create Invoice"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions Create, Cancel
+	extensionPoints EP_JustForTest
+	extends UC_1_Manage_Invoices onExtensionPoint UC_1_Manage_Invoices.EPCreate 
+	
+	priority Must //High
+	progress Plan
+	description "Create Invoice"
+
+	scenario MainScenario : Main {
+		name "MainScenario"
+		executionMode Sequential
+
+		step s1: System_Executes: ShowData {"System Shows a Master-Detail Entity Form for Invoice/InvoiceLines, with the available Actions (Create, Cancel)"  nextStep s2}
+		step s2: Actor_PrepareData { //"Actor Fills the Entity Form, with the following sub-steps:"
+			step s2_1: Actor_PrepareData { "..." }
+			step s2_2: Actor_PrepareData { "..." }
+		}
+		step s3: None {  
+			ifAction Create {
+				step s3_a_1: Actor_CallSystem {"Actor trigger the 'Create' Action"}
+				step s3_a_2: System_Executes: SubmitData {"System validates data and Create the submitted Invoice/InvoiceLines"}
+				step s3_a_3: System_ReturnResult {"System returns feedback 'Invoice Created'"} 
+			} ifAction Cancel {
+				step s3_b_1: Actor_CallSystem: CancelUseCase {"Actor trigger the 'Cancel' Action"}
+				step s3_b_2: System_Executes: CancelUseCase {"System aborts operation"}
+			}
+		}
+		step s4: System_Executes: TerminateUseCase {"System terminates use case"}
+	} 
+
+}
+
+useCase UC_1_2_Update_Invoice: EntityUpdate {
+	name "Update Invoice"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions Update, ReSubmit2Approval, Cancel
+	extends UC_1_Manage_Invoices onExtensionPoint UC_1_Manage_Invoices.EPUpdate
+}
+
+useCase UC_1_4_Print_InvoiceReceipt_Report: EntityReport {
+	name "Print_InvoiceReceipt_Report"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions Print, Cancel
+	extends UC_1_Manage_Invoices onExtensionPoint UC_1_Manage_Invoices.EPPrint_Invoice
+}
+
+useCase UC_1_6_Export_Invoices: EntitiesInteropExport {
+	name "Export_Invoices"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions ExportInvoices, Cancel
+	extends UC_1_Manage_Invoices onExtensionPoint UC_1_Manage_Invoices.EPExport_Invoices
+}
+
+useCase UC_1_8_Delete_Invoice: EntityDelete {
+	name "Delete_Invoice(s)"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions Delete, Cancel
+	extends UC_1_Manage_Invoices onExtensionPoint UC_1_Manage_Invoices.EPDelete
+}
+
+useCase UC_1_9_Register_Payment: EntityUpdate {
+	name "Register_Payment"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions ConfirmPayment, Cancel
+	extends UC_1_Manage_Invoices onExtensionPoint UC_1_Manage_Invoices.EPUpdate
+}
+
+useCase UC_2_4_Delete_Invoice: EntityDelete {
+	name "Delete_Invoice(s)"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions Delete, Cancel
+}
+
+useCase UC_3_4_Submit_Invoice_Approval: EntityUpdate {
+	name "Submit_Invoice_Approval"
+	actorInitiates AU_Manager
+	businessEntity BE_Invoice_Simple 
+	actions Approve, Reject, Cancel
+}
+
+useCase UC_4_Notify2Approve: EntitiesInteropSendMessage {
+	name "Notify2Approve"
+	actorInitiates AT_NotifyManager
+	businessEntity BE_Invoice_Simple 
+	actions TimerNotify
+}
+
+/********************************************************
+   StateMachines 
+*********************************************************/
+ 
+stateMachine SM_E_Invoice: Complex {
+	name "Invoice_StateMachine"   
+	entity E_Invoice
+
+	state StateInitial isInitial onEntry "Invoice e= new Invoice();": 
+		useCase UC_1_1_Create_Invoice action UC_1_1_Create_Invoice.Create nextState PendingState
+	state PendingState onEntry "e.state= 'Pending'; e.isApproved= False;":
+		useCase UC_4_Notify2Approve action UC_4_Notify2Approve.TimerNotify nextState PendingState
+		useCase UC_3_4_Submit_Invoice_Approval action UC_3_4_Submit_Invoice_Approval.Approve nextState ApprovedState 
+		useCase UC_3_4_Submit_Invoice_Approval action UC_3_4_Submit_Invoice_Approval.Reject nextState RejectedState 
+		useCase UC_2_4_Delete_Invoice action UC_2_4_Delete_Invoice.Delete nextState DeletedState 
+	state ApprovedState onEntry "e.state= 'Approved'; e.isApproved= True;":
+		useCase UC_1_4_Print_InvoiceReceipt_Report action UC_1_4_Print_InvoiceReceipt_Report.Print
+		useCase UC_1_6_Export_Invoices action UC_1_6_Export_Invoices.ExportInvoices 
+		useCase UC_1_9_Register_Payment action UC_1_9_Register_Payment.ConfirmPayment nextState PaidState 
+	state RejectedState onEntry "e.state= 'Rejected'":
+		useCase UC_1_8_Delete_Invoice action UC_1_8_Delete_Invoice.Delete nextState DeletedState 
+		useCase UC_1_2_Update_Invoice action UC_1_2_Update_Invoice.ReSubmit2Approval nextState PendingState 
+	state PaidState isFinal onEntry "e.state= 'Paid'"
+	state DeletedState isFinal onEntry "e.state= 'Deleted'"
+}
+
+/********************************************************
+   Requirements Relations 
+*********************************************************/
+
+requirementRelation FR1_QR1 : Supports { source FR_1 target QR_1 }
+requirementRelation QR1_QR2 : Conflicts { source QR_1 target QR_2 }
+requirementRelation UC_1_1_G_1 : Supports { source UC_1_1_Create_Invoice target QR_1 }
+
+

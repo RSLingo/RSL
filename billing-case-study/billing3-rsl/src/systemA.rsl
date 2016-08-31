@@ -1,0 +1,71 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: August/2016
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * Variation: The Billing System A integrating subsystems A_1 and A_2, and using a reusableSystem A_3
+ * 		subsystems A_1 specifies Customer related features
+ * 		subsystems A_2 specifies Invoice related features
+ * 		reusableSystem A_3 specifies Product + VAT related features
+ */
+
+package-system billingsystem.systems
+	
+import billingsystem.glossary.*
+import billingsystem.stakeholders.*
+
+import billingsystem.subsystems.*
+import billingsystem.reusesystems.*
+
+/********************************************************
+   System definition 
+*********************************************************/
+system 	S_billingsystem : System {
+	name "BillingSystem"	
+	scope In
+	subSystems S_subsystem_A_1, S_subsystem_A_2
+	reusableSystems S_Reusesystem_A_3
+}
+
+
+/********************************************************
+   Requirements 
+*********************************************************/
+
+/*
+ * Requirements: Goals
+ */
+ 
+goal G_CC:Abstract {name"Cross-Cutting Concerns" description "Cross-cutting system goals"}
+goal G_CC_1:Abstract {name"Security" partOf G_CC priority Should description "The system shall provide security qualities and respective features such as confidentiality, integrity, authenticity, and non-repudiation."}
+goal G_CC_1_1:Abstract {name"Security at communication level" partOf G_CC_1 priority Should description "The communication between the PC clients and the system server shall be secure..."}
+goal G_CC_1_2:Abstract {name"Data Privacy" partOf G_CC_1 priority Should description "System shall provide that critical data saved at DBs or file system are kept private/confidencial/encrypted"}
+
+/*
+ * Requirements: Constraints
+ */
+ 
+constraint Co1 : Project: Project_Time {name "nameAlias" } 
+constraint Co2 : Technological: Technological_PlatformHardware {name "nameAlias"} 
+
+/*
+ * Requirements: QRs
+ */
+ QR QR_1 : Usability: Usability_Learnability {name "YYY" metric Time_Min value 2 priority Must description "YYY" }
+ QR QR_2 : Security: Security_Privacy {name "ZZZ"  metric Other value 24 priority Won't description "ZZZ" }
+ 
+ 
+ /*
+ * Requirements: FRs
+ */
+ FR  FR_1 : Functional { name " FR1" priority Must description "Functional Requirement 1"}
+ FR  FR_2 : Functional { name " FR2" priority Should description "Functional Requirement 2"}
+ 
+ 
+/********************************************************
+   Requirements Relations 
+*********************************************************/
+
+requirementRelation FR1_QR1 : Supports { source FR_1 target QR_1 }
+requirementRelation QR1_QR2 : Conflicts { source QR_1 target QR_2 }
+requirementRelation UC_1_1_G_1 : Supports { source UC_1_1_Create_Invoice target QR_1 }

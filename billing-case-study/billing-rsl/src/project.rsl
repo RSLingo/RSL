@@ -1,0 +1,22 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: 2016/August
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * 
+ */
+
+package-project billingsystem 
+
+project P_Billing : Research {
+	name "BillingSystem Project"
+	domain PublicSector
+	plannedSchedule {start 1-Jan-2016  end 31-Dec-2016}
+	actualSchedule {start 1-Jun-2016 end 31-Dec-2016}
+	organizations {customer "Any"  supplier "INESC-ID, IST, UL" partners "Any"}
+	progress OnDesign
+	summary "[...]"
+	description "[...]"
+}
+
+

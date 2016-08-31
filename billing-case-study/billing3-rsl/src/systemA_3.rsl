@@ -1,0 +1,54 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: August/2016
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * Variation: The Billing System A integrating subsystems A_1 and A_2, and using a reusableSystem A_3
+ * 		subsystems A_1 specifies Customer related features
+ * 		subsystems A_2 specifies Invoice related features
+ * 		reusableSystem A_3 specifies Product + VAT related features
+ */
+
+package-system billingsystem.reusesystems
+
+
+/********************************************************
+   System definition 
+*********************************************************/
+system 	S_Reusesystem_A_3 : ReusableSystem {
+	name "Reusesystem_A_3"	
+	scope In
+	description ""
+}
+
+/********************************************************
+   Entities 
+*********************************************************/
+entity E_VAT : Principal {
+	name "VAT"   
+	attribute VATCode: Integer {name "VAT Code" NotNull Unique}
+	attribute VATName: String(30) {name "VAT Class Name" NotNull}
+	attribute VATValue: Decimal(2.2) {name "VAT Class Value " NotNull}
+	primaryKey (VATCode)
+	description "VAT Class"
+}
+
+entity E_Product : Principal {
+	name "Product"   
+	attribute ID: Integer {name "Product ID" NotNull Unique}
+	attribute Name: String(50) {name "Name" multiplicity "1..2" description "Product Name"}
+	attribute valueWithoutVAT: Decimal(16.2) {name "Price Without VAT" NotNull }
+	attribute valueWithVAT: Decimal(16.2) {name "Price With VAT" NotNull }
+	attribute VATClassCode : Integer {name "VAT Code" NotNull}
+	attribute VATClassValue : Decimal(2.2) {name "VAT Class Value " NotNull}
+	primaryKey (ID)
+	foreignKey E_VAT(VATClassCode)
+	description "Products"
+}
+
+/********************************************************
+   BusinessEntities 
+*********************************************************/
+
+businessEntity BE_VAT: VerySimple {name "BE_VAT" master E_VAT description "BE VAT"}
+businessEntity BE_Product: Simple {name "BE_Product"  master E_Product reference E_VAT description "BE Product" }

@@ -1,0 +1,28 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: 2016/August
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * 
+ */
+
+
+package-glossary billingsystem.glossay
+ 
+term trm_user : Noun {
+	name "User"
+	applicationTo Actor, Entity, Stakeholder
+	description "A User is ..."
+}
+
+term trm_administrador_tecnico : Noun {
+	name "SysAdmin"
+	applicationTo Actor, Stakeholder, Entity
+	synonym "SysAdministrator"
+	isA trm_user
+	description "Um administrador técnico é responsável pela administração do sistema e que portanto tem 
+    acesso a operações relacionadas com a gestão do mesmo  (e.g. monitorização, manutenção, paremetrização, importação e exportação de dados), 
+	entre outras funcionalidades associadas a procedimentos cuja vertente técnica implica o conhecimento da arquitectura e implementação do sistema."
+}
+
+

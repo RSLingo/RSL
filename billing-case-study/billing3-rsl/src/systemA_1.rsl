@@ -1,0 +1,46 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: August/2016
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * Variation: The Billing System A integrating subsystems A_1 and A_2, and using a reusableSystem A_3
+ * 		subsystems A_1 specifies Customer related features
+ * 		subsystems A_2 specifies Invoice related features
+ * 		reusableSystem A_3 specifies Product + VAT related features
+ */
+
+package-system billingsystem.subsystems
+	
+import billingsystem.glossary.*
+import billingsystem.stakeholders.*
+
+import billingsystem.subsystems.*
+
+/********************************************************
+   System definition 
+*********************************************************/
+system 	S_subsystem_A_1 : SubSystem {
+	name "BillingSystem-Customers"	
+	scope In
+}
+
+entity E_Customer : Principal {
+	name "Customer" 
+	attribute ID: Integer {name "Customer ID" NotNull Unique}
+	attribute Name: String(50) {name "Customer Name" NotNull Unique}
+	attribute FiscalID: String(12) {name "Fiscal ID" NotNull Unique}
+	primaryKey (ID)
+	check CK_Customer1 "ValidFiscalID(FiscalID)"
+	description "Customers" 
+}
+
+entity E_CustomerVIP : Principal {
+	name "CustomerVIP" 
+	isA E_Customer
+	//attribute ID: Integer {name "Customer ID" NotNull Unique}
+	attribute Phone: String(12) {name "Phone #" NotNull Unique}
+	//primaryKey (ID)
+	description "Customers VIP" 
+}
+
+businessEntity BE_Customer: Simple  {name "BE_Customer"  master E_Customer}

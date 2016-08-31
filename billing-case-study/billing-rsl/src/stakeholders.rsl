@@ -1,0 +1,61 @@
+/*
+ * Author: Alberto Rodrigues da Silva
+ * Date: 2016/August
+ * 
+ * The BillingSystem Case Study, specified in RSL for education purpose
+ * 
+ */
+
+package-stakeholders billingsystem.stakeholders
+
+stakeholder stk_user : Person { 
+	name "User" 
+	category Business_User_Direct
+}
+stakeholder stk_operator : Person {
+	name "Operator" 
+	category Business_User_Direct 
+	isA stk_user
+}
+
+stakeholder stk_product_operator : Person {
+	name "ProductOperator"
+	category Business_User_Direct
+	isA stk_user
+}
+
+stakeholder stk_manager : Person {
+	name "Manager"
+	category Business_User_Direct
+	isA stk_user
+}
+
+stakeholder stk_tech_admin : Person {
+	name "TechnicalAdmin"
+	category Business_User_Direct
+	isA stk_user
+}
+
+stakeholder stk_sap_acc : ExternalSystem{
+	name "SAP_Accounting"
+	category ExternalSystem
+}
+
+stakeholder stk_portal_financeinstitute : ExternalSystem {
+	name "Portal_FinanceInstitute"
+	category ExternalSystem
+}
+
+stakeholder stk_enterprise : Organization {
+	name "Enterprise"
+	category Business_Customer
+}	
+stakeholder stk_financeinstitute : Organization{
+	name "FinanceInstitute"
+	category Business_Government
+}	
+
+stakeholder stk_customer : Organization {
+	name "Customer"
+	category Business_User_Indirect
+}	
