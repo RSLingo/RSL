@@ -1,6 +1,4 @@
-# RSLingo's RSL (Requirements Specification Language)
-
-## RSLingo RSL System Requirements Specification - MS-Excel Template (RSLingo-RSL-Excel-Template)
+## RSLingo's RSL (Requirements Specification Language)
 
 Copyright
 --------------------------------------------------------------------------------------
