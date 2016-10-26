@@ -4,7 +4,7 @@ Copyright
 --------------------------------------------------------------------------------------
 © 2016 Alberto Rodrigues da Silva (coordinator) et al., Instituto Superior Técnico, Universidade de Lisboa. All rights reserved.
 
-This material is available for academic, research and comercial purposes, however, You should keep the authors and copyright notice.
+This material is available for academic, research and comercial purpose, however, You should keep the authors and copyright notice.
 Any use of this software constitutes full acceptance of all terms of the software's license.
 
 Description
