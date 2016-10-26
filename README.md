@@ -38,7 +38,6 @@ References
 
 Licence
 --------------------------------------------------------------------------------------
-RSLingo-RSL-Excel-Template is released under the Eclipse Public License (EPL) - Version 1.0.
-For further details please consult the LICENCE file. 
+This material is released under the Eclipse Public License (EPL) - Version 1.0.
 
-http://www.eclipse.org/legal/epl-v10.html
+http://www.eclipse.org/legal/epl-v10.html 
