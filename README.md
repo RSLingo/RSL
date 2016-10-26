@@ -2,9 +2,9 @@
 
 Copyright
 --------------------------------------------------------------------------------------
-Copyright 2013 - 2016 INESC-ID, Instituto Superior Técnico, Universidade de Lisboa. All rights reserved.
+© 2016 Alberto Rodrigues da Silva (coordinator) et al., Instituto Superior Técnico, Universidade de Lisboa. All rights reserved.
 
-This material is available for academic, research and business purposes, however, You should keep the authors and copyright notice.
+This material is available for academic, research and comercial purposes, however, You should keep the authors and copyright notice.
 Any use of this software constitutes full acceptance of all terms of the software's license.
 
 Description
@@ -38,7 +38,7 @@ References
 
 Licence
 --------------------------------------------------------------------------------------
-RSLingo-RSL-Excel-Template is released under the EUPL 1.1 licence.
+RSLingo-RSL-Excel-Template is released under the Eclipse Public License (EPL) - Version 1.0.
 For further details please consult the LICENCE file. 
 
-http://joinup.ec.europa.eu/software/page/eupl 
+http://www.eclipse.org/legal/epl-v10.html
