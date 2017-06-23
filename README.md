@@ -36,6 +36,8 @@ References
 
 7. Dušan Savić, Siniša Vlajić, Saša Lazarević, Vojislav Stanojević, Ilija Antović, Miloš Milić, Alberto Rodrigues da Silva, Use Case Specification Using the SILABREQ Domain Specific Language, in Computing and Informatics Journal, 34(4):877–910, 2015. http://isg.inesc-id.pt/alb/static/papers/2015/r14-ds-CAI-Journal.pdf
 
+8.  Alberto Rodrigues da Silva, Linguistic Patterns and Styles for Requirements Specification: The RSL/Business-Level Language, Proceedings of EuroPLOP’2017, Hillside Europe, 2017.  https://www.researchgate.net/publication/317167533_Linguistic_Patterns_and_Styles_for_Requirements_Specification_The_RSLBusiness-Level_Language
+
 Licence
 --------------------------------------------------------------------------------------
 This material is released under the Eclipse Public License (EPL) - Version 1.0.
